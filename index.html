@@ -322,6 +322,15 @@
             color: #8B4513;
         }
         
+        .test-notice {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            display: none;
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -468,6 +477,11 @@
     <section id="contact">
         <div class="container">
             <h2 class="section-title">اتصل بنا</h2>
+            
+            <div class="test-notice" id="testNotice">
+                <p><strong>ملاحظة:</strong> أنت تختبر الموقع محلياً. عند رفعه على GitHub Pages، سيتم إرسال نموذج الحجز إلى بريدك الإلكتروني تلقائياً.</p>
+            </div>
+            
             <div class="contact-content">
                 <div class="contact-info">
                     <h3>معلومات التواصل</h3>
@@ -487,7 +501,7 @@
                 </div>
                 <div class="contact-form">
                     <h3>احجز طاولة</h3>
-                    <form action="https://formsubmit.co/edgegroup2025@gmail.com" method="POST">
+                    <form id="reservationForm" action="https://formsubmit.co/edgegroup2025@gmail.com" method="POST">
                         <input type="hidden" name="_subject" value="📞 طلب حجز جديد - مطعمنا العربي">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_next" value="https://alhaddadi5.github.io/arabic-restaurant/thank-you.html">
@@ -521,7 +535,7 @@
             <!-- قسم الواتساب -->
             <div class="whatsapp-section">
                 <h3>أو احجز مباشرة عبر الواتساب</h3>
-                <a href="https://wa.me/966507418714?text=مرحباً، أريد حجز طاولة في المطعم" 
+                <a href="https://wa.me/971507418714?text=مرحباً، أريد حجز طاولة في المطعم" 
                    class="btn whatsapp-btn" 
                    style="font-size: 18px;">
                    <i class="fab fa-whatsapp"></i> احجز عبر الواتساب الآن
@@ -560,6 +574,28 @@
                     });
                 }
             });
+        });
+
+        // كشف إذا كان الموقع يعمل محلياً
+        if (window.location.protocol === 'file:') {
+            document.getElementById('testNotice').style.display = 'block';
+        }
+
+        // معالجة إرسال النموذج
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            // إذا كان يعمل محلياً، منع الإرسال الفعلي وعرض رسالة بديلة
+            if (window.location.protocol === 'file:') {
+                e.preventDefault();
+                const formData = new FormData(this);
+                const name = formData.get('name');
+                const phone = formData.get('phone');
+                const date = formData.get('date');
+                const time = formData.get('time');
+                const guests = formData.get('guests');
+                
+                alert(`شكراً ${name} على حجز الطاولة!\n\nتفاصيل الحجز:\nالهاتف: ${phone}\nالتاريخ: ${date}\nالوقت: ${time}\nعدد الأشخاص: ${guests}\n\nسيتم التواصل معك قريباً للتأكيد.`);
+                this.reset();
+            }
         });
 
         // دالة لإضافة تأثيرات عند التمرير
