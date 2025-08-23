@@ -122,6 +122,16 @@
             color: #8B4513;
         }
         
+        .whatsapp-btn {
+            background-color: #25D366;
+            border-color: #25D366;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: transparent;
+            color: #25D366;
+        }
+        
         section {
             padding: 80px 0;
         }
@@ -279,6 +289,14 @@
         .form-group textarea {
             height: 120px;
             resize: vertical;
+        }
+        
+        .whatsapp-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
         }
         
         footer {
@@ -454,13 +472,13 @@
                 <div class="contact-info">
                     <h3>معلومات التواصل</h3>
 
-  <p>
-  <i class="fas fa-map-marker-alt"></i> 
-  العنوان: أبوظبي - مصفح الصناعية م32/2
-  <a href="https://maps.app.goo.gl/uYtpD4cgfDpXpsbj6" target="_blank" style="color: #8B4513; margin-right: 10px;">
-    <i class="fas fa-map-marked-alt"></i> افتح الخريطة
-  </a>
-</p>
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i> 
+                        العنوان: أبوظبي - مصفح الصناعية م32/2
+                        <a href="https://maps.app.goo.gl/uYtpD4cgfDpXpsbj6" target="_blank" style="color: #8B4513; margin-right: 10px;">
+                            <i class="fas fa-map-marked-alt"></i> افتح الخريطة
+                        </a>
+                    </p>
 
                     <p><i class="fas fa-phone"></i> الهاتف: 971507418714</p>
                     <p><i class="fas fa-envelope"></i> البريد الإلكتروني: alyafei90008@gmail.com</p>
@@ -469,30 +487,46 @@
                 </div>
                 <div class="contact-form">
                     <h3>احجز طاولة</h3>
-                    <form id="reservationForm">
+                    <form action="https://formsubmit.co/edgegroup2025@gmail.com" method="POST">
+                        <input type="hidden" name="_subject" value="📞 طلب حجز جديد - مطعمنا العربي">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="https://alhaddadi5.github.io/arabic-restaurant/thank-you.html">
+                        
                         <div class="form-group">
                             <label for="name">الاسم الكامل</label>
-                            <input type="text" id="name" required>
+                            <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="phone">رقم الهاتف</label>
-                            <input type="tel" id="phone" required>
+                            <input type="tel" id="phone" name="phone" required>
                         </div>
                         <div class="form-group">
                             <label for="date">التاريخ</label>
-                            <input type="date" id="date" required>
+                            <input type="date" id="date" name="date" required>
                         </div>
                         <div class="form-group">
                             <label for="time">الوقت</label>
-                            <input type="time" id="time" required>
+                            <input type="time" id="time" name="time" required>
                         </div>
                         <div class="form-group">
                             <label for="guests">عدد الأشخاص</label>
-                            <input type="number" id="guests" min="1" max="20" required>
+                            <input type="number" id="guests" name="guests" min="1" max="20" required>
                         </div>
+                        <input type="hidden" name="_captcha" value="false">
                         <button type="submit" class="btn">احجز الآن</button>
                     </form>
                 </div>
+            </div>
+
+            <!-- قسم الواتساب -->
+            <div class="whatsapp-section">
+                <h3>أو احجز مباشرة عبر الواتساب</h3>
+                <a href="https://wa.me/966507418714?text=مرحباً، أريد حجز طاولة في المطعم" 
+                   class="btn whatsapp-btn" 
+                   style="font-size: 18px;">
+                   <i class="fab fa-whatsapp"></i> احجز عبر الواتساب الآن
+                </a>
+                <p style="margin-top: 10px; color: #666;">الرد خلال دقائق</p>
             </div>
         </div>
     </section>
@@ -526,13 +560,6 @@
                     });
                 }
             });
-        });
-
-        // دالة لحجز الطاولة
-        document.getElementById('reservationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('شكراً لك! تم استلام طلب حجز الطاولة وسنتصل بك خلال دقائق لتأكيد الحجز.');
-            this.reset();
         });
 
         // دالة لإضافة تأثيرات عند التمرير
